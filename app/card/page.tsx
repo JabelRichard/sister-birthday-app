@@ -1,18 +1,39 @@
+// app/card/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-const birthdayMessage = `Happy Birthday! ❤️
+const birthdayMessage = `Dear Dada Sophia ❤️
 
-I hope this new chapter of your life brings you happiness, peace, love, success and many beautiful moments.
+It’s your special day, sis, and honestly, I don’t even know where to begin because there is so much, I want to say to you. ❤️
 
-Thank you for being such a special person in my life. I hope you always remember how loved and appreciated you are.
+I could sit here and write so many things about you, and I still don’t think I would be able to fully explain how much you mean to me
+You are not just my sister. You have been a guide, someone I can look up to, someone who has helped me through different moments in my life, and someone who has always given me reasons to keep going and become a better version of myself.
 
-May this year bring you closer to your dreams and give you many reasons to smile.
+When I look at where I am today, I realize that some of the person I’m becoming is because of the people who believed in me, encouraged me, guided me, and pushed me when I needed it and you are one of those people.
+I may not always say it, I may not always know how to express it, But I notice it. I appreciate it. So, I’m truly grateful for you.
+I’m honestly so lucky to have you as my sister. ❤️
 
-Happy Birthday once again, Sis! 🎂❤️`;
+So today, I don’t just wish you a happy birthday.
+I pray that God gives you a long, beautiful, and blessed life, May He protect you, guide you, give you peace, and bless you with the things you have been praying for quietly in your heart.
+May this new year bring you more happiness than sadness, more reasons to smile than to worry, and more beautiful moments
+And I hope that years from now, we will still be here celebrating your birthday together ❤️
+
+I know I could keep going forever, because I have so much more I want to say. But maybe some things don’t need to be said perfectly.
+
+Just know that I love you.
+
+I appreciate you.
+
+I’m proud to call you, my sister.
+
+And I’m truly grateful that life gave me you❤️
+
+Happy Birthday, Sis. 🎂❤️
+
+I love you so, so much. ❤️`;
 
 export default function CardPage() {
   const router = useRouter();
@@ -36,11 +57,51 @@ export default function CardPage() {
 
   return (
     <main className="card-page select-none">
-      {/* Paper texture overlay across the whole screen */}
-      <div className="paper-texture" />
+      {/* =====================================================
+          BACKGROUND: PURE BLACK NIGHT SKY & TWINKLING STARS
+      ====================================================== */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-black">
+        {/* Ambient Glow */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 top-1/2 h-[min(500px,90vw)] w-[min(500px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-500/[0.06] blur-[120px]"
+        />
 
-      {/* Decorative Inset Border */}
-      <div className="paper-edge" />
+        {/* Twinkling Stars */}
+        {Array.from({ length: 45 }).map((_, index) => (
+          <motion.span
+            key={index}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: index % 5 === 0 ? 2 : 1,
+              height: index % 5 === 0 ? 2 : 1,
+              left: `${(index * 37.7) % 96}%`,
+              top: `${(index * 61.3) % 92}%`,
+            }}
+            animate={{
+              opacity: [0.08, 0.8, 0.08],
+              scale: [0.8, 1.25, 0.8],
+            }}
+            transition={{
+              duration: 3 + (index % 4),
+              repeat: Infinity,
+              delay: (index % 8) * 0.45,
+              ease: "easeInOut",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Decorative Inset Glowing Border */}
+      <div className="card-edge" />
 
       <div className="page-content">
         {/* Top small label */}
@@ -62,15 +123,6 @@ export default function CardPage() {
         >
           ♥
         </motion.div>
-
-        {/* Greeting */}
-        <motion.h1
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.7 }}
-        >
-          To my amazing sister <span>❤️</span>
-        </motion.h1>
 
         <motion.div
           className="little-line"
@@ -106,21 +158,6 @@ export default function CardPage() {
           )}
         </AnimatePresence>
 
-        {/* Signature */}
-        <AnimatePresence>
-          {showEnding && (
-            <motion.div
-              className="signature"
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="signature-line" />
-              <div className="signature-text">With love ❤️</div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         {/* Card Ending / Next Action */}
         <AnimatePresence>
           {showEnding && (
@@ -139,21 +176,11 @@ export default function CardPage() {
                 whileTap={{ scale: 0.97 }}
                 onClick={() => router.push("/memories")}
               >
-                See your memories <span>→</span>
+                Continue <span>→</span>
               </motion.button>
             </motion.div>
           )}
         </AnimatePresence>
-
-        {/* Bottom note */}
-        <motion.div
-          className="bottom-note"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
-        >
-          Made with love, just for you
-        </motion.div>
       </div>
 
       <style jsx global>{`
@@ -167,7 +194,7 @@ export default function CardPage() {
           padding: 0;
           width: 100%;
           min-height: 100%;
-          background: #fbf5eb;
+          background: #000000;
         }
 
         .card-page {
@@ -175,49 +202,22 @@ export default function CardPage() {
           min-height: 100dvh;
           width: 100%;
           overflow-x: hidden;
-          background: linear-gradient(
-            170deg,
-            #fffdf9 0%,
-            #fcf4e8 50%,
-            #f7ece0 100%
-          );
-          color: #3f2922;
+          background: #000000;
+          color: #ffffff;
           display: flex;
           flex-direction: column;
           align-items: center;
         }
 
-        /* Full Screen Paper Texture */
-        .paper-texture {
-          position: fixed;
-          inset: 0;
-          pointer-events: none;
-          opacity: 0.35;
-          background-image:
-            radial-gradient(
-              rgba(90, 61, 45, 0.16) 0.6px,
-              transparent 0.7px
-            ),
-            radial-gradient(
-              rgba(255, 255, 255, 0.7) 0.7px,
-              transparent 0.8px
-            );
-          background-size:
-            12px 12px,
-            16px 16px;
-          mix-blend-mode: multiply;
-          z-index: 1;
-        }
-
         /* Inset Page Border */
-        .paper-edge {
+        .card-edge {
           position: fixed;
           top: max(10px, env(safe-area-inset-top));
           bottom: max(10px, env(safe-area-inset-bottom));
           left: 10px;
           right: 10px;
-          border: 1px solid rgba(112, 72, 52, 0.12);
-          border-radius: 6px;
+          border: 1px solid rgba(244, 114, 182, 0.15);
+          border-radius: 8px;
           pointer-events: none;
           z-index: 2;
         }
@@ -237,18 +237,15 @@ export default function CardPage() {
         /* Top Label */
         .top-label {
           margin-bottom: 12px;
-          color: rgba(120, 80, 60, 0.65);
-          font-family:
-            Inter,
-            system-ui,
-            sans-serif;
+          color: rgba(255, 255, 255, 0.45);
+          font-family: Inter, system-ui, sans-serif;
           font-size: 10px;
-          letter-spacing: 0.2em;
+          letter-spacing: 0.25em;
           text-transform: uppercase;
           text-align: center;
         }
 
-        /* Card Header */
+        /* Card Symbol */
         .card-symbol {
           width: 28px;
           height: 28px;
@@ -256,34 +253,14 @@ export default function CardPage() {
           align-items: center;
           justify-content: center;
           margin-bottom: 8px;
-          color: #b35954;
+          color: #f472b6;
           font-size: 17px;
-        }
-
-        h1 {
-          margin: 0;
-          color: #432820;
-          font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
-          font-size: 26px;
-          font-weight: 500;
-          line-height: 1.25;
-          letter-spacing: -0.4px;
-          text-align: center;
-        }
-
-        h1 span {
-          display: inline-block;
-          margin-left: 6px;
-          font-size: 0.85em;
         }
 
         .little-line {
           height: 1px;
           margin: 16px 0 22px;
-          background: #c58670;
+          background: rgba(244, 114, 182, 0.3);
         }
 
         /* Letter Body */
@@ -293,12 +270,8 @@ export default function CardPage() {
 
         .letter p {
           margin: 0 0 18px;
-          color: #503932;
-          font-family:
-            "Segoe Print",
-            "Caveat",
-            "Bradley Hand",
-            cursive;
+          color: rgba(255, 255, 255, 0.88);
+          font-family: "Segoe Print", "Caveat", "Bradley Hand", cursive;
           font-size: 16px;
           line-height: 1.8;
           letter-spacing: 0.01em;
@@ -307,35 +280,8 @@ export default function CardPage() {
         .letter p:last-child {
           margin-top: 4px;
           margin-bottom: 0;
-          color: #432820;
+          color: #fbcfe8;
           font-weight: 600;
-        }
-
-        /* Signature */
-        .signature {
-          width: 100%;
-          margin-top: 14px;
-          display: flex;
-          flex-direction: column;
-          align-items: flex-end;
-        }
-
-        .signature-line {
-          width: 65px;
-          height: 1px;
-          margin-bottom: 6px;
-          background: rgba(108, 69, 52, 0.3);
-        }
-
-        .signature-text {
-          color: #8a5a4d;
-          font-family:
-            "Segoe Print",
-            "Caveat",
-            "Bradley Hand",
-            cursive;
-          font-size: 14px;
-          transform: rotate(-2deg);
         }
 
         /* Ending Section */
@@ -343,7 +289,7 @@ export default function CardPage() {
           width: 100%;
           margin-top: 30px;
           padding-top: 22px;
-          border-top: 1px dashed rgba(112, 72, 52, 0.2);
+          border-top: 1px dashed rgba(244, 114, 182, 0.2);
           text-align: center;
           display: flex;
           flex-direction: column;
@@ -352,66 +298,47 @@ export default function CardPage() {
 
         .ending-small {
           margin: 0 0 4px;
-          color: #94756b;
-          font-family:
-            "Segoe Print",
-            "Caveat",
-            "Bradley Hand",
-            cursive;
+          color: rgba(255, 255, 255, 0.45);
+          font-family: "Segoe Print", "Caveat", "Bradley Hand", cursive;
           font-size: 13px;
         }
 
         .ending-main {
           margin: 0 0 18px;
-          color: #432820;
-          font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
+          color: #fdf2f8;
+          font-family: Georgia, "Times New Roman", serif;
           font-size: 20px;
         }
 
         .memories-button {
           width: 100%;
           max-width: 290px;
-          border: 1px solid rgba(116, 70, 54, 0.25);
+          border: 1px solid rgba(244, 114, 182, 0.25);
           border-radius: 999px;
           padding: 13px 22px;
-          background: linear-gradient(
-            135deg,
-            rgba(137, 76, 64, 0.98),
-            rgba(110, 57, 54, 0.98)
-          );
-          color: #fff8f1;
-          font-family:
-            Inter,
-            system-ui,
-            sans-serif;
+          background: rgba(255, 255, 255, 0.07);
+          color: #ffffff;
+          font-family: Inter, system-ui, sans-serif;
           font-size: 13.5px;
           letter-spacing: 0.03em;
           cursor: pointer;
-          box-shadow: 0 6px 18px rgba(91, 48, 42, 0.25);
+          backdrop-filter: blur(12px);
+          box-shadow: 0 0 25px rgba(244, 114, 182, 0.15);
           display: inline-flex;
           align-items: center;
           justify-content: center;
           gap: 6px;
+          transition: all 0.2s ease;
+        }
+
+        .memories-button:hover {
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(244, 114, 182, 0.4);
         }
 
         .memories-button span {
           font-size: 1.1em;
           line-height: 1;
-        }
-
-        .bottom-note {
-          margin-top: 16px;
-          color: rgba(120, 80, 60, 0.45);
-          font-family:
-            "Segoe Print",
-            "Caveat",
-            "Bradley Hand",
-            cursive;
-          font-size: 11px;
-          text-align: center;
         }
       `}</style>
     </main>

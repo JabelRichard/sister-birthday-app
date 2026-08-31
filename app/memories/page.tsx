@@ -1,3 +1,4 @@
+// app/memories/page.tsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -6,15 +7,15 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const memories = [
   {
-    image: "/memories/photo1.jpg",
+    image: "/memories/number3.jpeg",
     caption: "One of many beautiful memories ❤️",
   },
   {
-    image: "/memories/photo2.jpg",
+    image: "/memories/number2.jpeg",
     caption: "Some moments never get old.",
   },
   {
-    image: "/memories/photo3.jpg",
+    image: "/memories/number1.jpeg",
     caption: "And hopefully many more to come.",
   },
 ];
@@ -61,34 +62,46 @@ export default function MemoriesPage() {
 
   return (
     <main className="memories-page select-none">
-      {/* Ambient background glows */}
-      <div className="ambient ambient-one" />
-      <div className="ambient ambient-two" />
+      {/* =====================================================
+          BACKGROUND: PURE BLACK NIGHT SKY & STARS
+      ====================================================== */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-black">
+        {/* Ambient Glows */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.15, 0.3, 0.15],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute left-1/2 top-1/2 h-[min(500px,90vw)] w-[min(500px,90vw)] -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-500/[0.06] blur-[120px]"
+        />
 
-      {/* Background particles */}
-      <div className="particles" aria-hidden="true">
-        {Array.from({ length: 20 }).map((_, index) => (
+        {/* Twinkling Stars */}
+        {Array.from({ length: 45 }).map((_, index) => (
           <motion.span
             key={index}
-            className="particle"
-            initial={{ opacity: 0, y: 20 }}
+            className="absolute rounded-full bg-white"
+            style={{
+              width: index % 5 === 0 ? 2 : 1,
+              height: index % 5 === 0 ? 2 : 1,
+              left: `${(index * 37.7) % 96}%`,
+              top: `${(index * 61.3) % 92}%`,
+            }}
             animate={{
-              opacity: [0, 0.45, 0],
-              y: [20, -100],
+              opacity: [0.08, 0.8, 0.08],
+              scale: [0.8, 1.25, 0.8],
             }}
             transition={{
-              duration: 4 + (index % 4),
+              duration: 3 + (index % 4),
               repeat: Infinity,
-              delay: index * 0.3,
-              ease: "easeOut",
+              delay: (index % 8) * 0.45,
+              ease: "easeInOut",
             }}
-            style={{
-              left: `${(index * 29) % 100}%`,
-              top: `${25 + ((index * 19) % 70)}%`,
-            }}
-          >
-            {index % 4 === 0 ? "✦" : "·"}
-          </motion.span>
+          />
         ))}
       </div>
 
@@ -257,9 +270,9 @@ export default function MemoriesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
-                And here's to many more
+                And now…
                 <br />
-                memories together.
+                let’s make another beautiful memory.
                 <span>❤️</span>
               </motion.h1>
 
@@ -306,7 +319,7 @@ export default function MemoriesPage() {
           padding: 0;
           width: 100%;
           min-height: 100%;
-          background: #0d0909;
+          background: #000000;
         }
 
         .memories-page {
@@ -314,62 +327,12 @@ export default function MemoriesPage() {
           min-height: 100dvh;
           width: 100%;
           overflow: hidden;
-          background:
-            radial-gradient(
-              circle at 50% 40%,
-              rgba(119, 65, 57, 0.22),
-              transparent 50%
-            ),
-            linear-gradient(
-              160deg,
-              #0b0808 0%,
-              #180f0e 50%,
-              #090707 100%
-            );
+          background: #000000;
           color: #fff;
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
-        }
-
-        /* Ambient Glows */
-        .ambient {
-          position: fixed;
-          border-radius: 50%;
-          pointer-events: none;
-          filter: blur(90px);
-        }
-
-        .ambient-one {
-          width: min(320px, 80vw);
-          height: min(320px, 80vw);
-          left: -100px;
-          bottom: -100px;
-          background: rgba(150, 75, 65, 0.1);
-        }
-
-        .ambient-two {
-          width: min(320px, 80vw);
-          height: min(320px, 80vw);
-          right: -100px;
-          top: -80px;
-          background: rgba(205, 135, 85, 0.08);
-        }
-
-        .particles {
-          position: fixed;
-          inset: 0;
-          overflow: hidden;
-          pointer-events: none;
-        }
-
-        .particle {
-          position: absolute;
-          color: rgba(239, 187, 140, 0.45);
-          font-family: Georgia, serif;
-          font-size: 11px;
-          text-shadow: 0 0 10px rgba(240, 180, 130, 0.4);
         }
 
         /* Content Container */
@@ -396,7 +359,7 @@ export default function MemoriesPage() {
         }
 
         .opening-line {
-          color: rgba(255, 245, 237, 0.96);
+          color: rgba(255, 255, 255, 0.95);
           font-family:
             Georgia,
             "Times New Roman",
@@ -408,7 +371,7 @@ export default function MemoriesPage() {
 
         .opening-subtitle {
           margin-top: 14px;
-          color: rgba(255, 255, 255, 0.52);
+          color: rgba(255, 255, 255, 0.55);
           font-family:
             "Segoe Print",
             "Caveat",
@@ -420,9 +383,9 @@ export default function MemoriesPage() {
 
         .opening-dot {
           margin-top: 28px;
-          color: #d99a77;
+          color: #f472b6;
           font-size: 14px;
-          text-shadow: 0 0 16px rgba(220, 150, 110, 0.6);
+          text-shadow: 0 0 16px rgba(244, 114, 182, 0.6);
         }
 
         /* Story Container */
@@ -480,7 +443,7 @@ export default function MemoriesPage() {
           left: 0;
           top: 0;
           height: 100%;
-          background: rgba(255, 205, 170, 0.85);
+          background: rgba(244, 114, 182, 0.85);
         }
 
         /* Responsive Photo Frame */
@@ -492,11 +455,11 @@ export default function MemoriesPage() {
           max-height: 52vh;
           overflow: hidden;
           border-radius: 16px;
-          background: #17100e;
+          background: #111111;
           box-shadow:
-            0 20px 45px rgba(0, 0, 0, 0.5),
-            0 4px 15px rgba(0, 0, 0, 0.3);
-          border: 1px solid rgba(255, 255, 255, 0.08);
+            0 20px 45px rgba(0, 0, 0, 0.6),
+            0 4px 15px rgba(0, 0, 0, 0.4);
+          border: 1px solid rgba(244, 114, 182, 0.18);
         }
 
         .image-wrapper {
@@ -520,7 +483,7 @@ export default function MemoriesPage() {
             180deg,
             rgba(0, 0, 0, 0.04),
             transparent 50%,
-            rgba(0, 0, 0, 0.3)
+            rgba(0, 0, 0, 0.4)
           );
           pointer-events: none;
         }
@@ -536,8 +499,8 @@ export default function MemoriesPage() {
           align-items: center;
           justify-content: center;
           color: rgba(255, 255, 255, 0.9);
-          background: rgba(0, 0, 0, 0.35);
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          background: rgba(0, 0, 0, 0.45);
+          border: 1px solid rgba(244, 114, 182, 0.25);
           backdrop-filter: blur(8px);
           -webkit-backdrop-filter: blur(8px);
           font-size: 11px;
@@ -567,7 +530,7 @@ export default function MemoriesPage() {
           position: absolute;
           top: -10px;
           left: 0;
-          color: rgba(218, 148, 112, 0.45);
+          color: rgba(244, 114, 182, 0.45);
           font-family: Georgia, serif;
           font-size: 32px;
           line-height: 1;
@@ -575,7 +538,7 @@ export default function MemoriesPage() {
 
         .caption p {
           margin: 0;
-          color: rgba(255, 244, 235, 0.95);
+          color: rgba(255, 255, 255, 0.92);
           font-family:
             "Segoe Print",
             "Caveat",
@@ -604,17 +567,23 @@ export default function MemoriesPage() {
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(244, 114, 182, 0.22);
           border-radius: 999px;
           padding: 10px 22px;
-          background: rgba(255, 255, 255, 0.08);
-          color: rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.06);
+          color: rgba(255, 255, 255, 0.92);
           backdrop-filter: blur(10px);
           -webkit-backdrop-filter: blur(10px);
           cursor: pointer;
           font-size: 12.5px;
           letter-spacing: 0.02em;
-          transition: transform 0.15s ease, background 0.2s ease;
+          box-shadow: 0 0 20px rgba(244, 114, 182, 0.12);
+          transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .next-button:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(244, 114, 182, 0.4);
         }
 
         .next-button:active {
@@ -628,6 +597,7 @@ export default function MemoriesPage() {
 
         .arrow {
           font-size: 14px;
+          color: #f472b6;
         }
 
         /* Ending Screen */
@@ -643,12 +613,12 @@ export default function MemoriesPage() {
         .ending-symbol {
           margin-bottom: 18px;
           font-size: 32px;
-          filter: drop-shadow(0 0 16px rgba(220, 120, 100, 0.4));
+          filter: drop-shadow(0 0 16px rgba(244, 114, 182, 0.4));
         }
 
         .ending h1 {
           margin: 0;
-          color: rgba(255, 244, 236, 0.95);
+          color: rgba(255, 255, 255, 0.95);
           font-family:
             Georgia,
             "Times New Roman",
@@ -667,7 +637,7 @@ export default function MemoriesPage() {
         .ending-divider {
           height: 1px;
           margin: 20px 0;
-          background: rgba(220, 154, 120, 0.6);
+          background: rgba(244, 114, 182, 0.4);
         }
 
         .last-thing {
@@ -684,19 +654,22 @@ export default function MemoriesPage() {
         .celebrate-button {
           margin-top: 24px;
           padding: 13px 28px;
-          border: 1px solid rgba(255, 255, 255, 0.2);
+          border: 1px solid rgba(244, 114, 182, 0.25);
           border-radius: 999px;
-          background: linear-gradient(
-            135deg,
-            rgba(155, 78, 66, 0.98),
-            rgba(110, 52, 51, 0.98)
-          );
-          color: #fff8f2;
-          box-shadow: 0 8px 24px rgba(80, 35, 32, 0.3);
+          background: rgba(255, 255, 255, 0.08);
+          color: #ffffff;
+          backdrop-filter: blur(12px);
+          box-shadow: 0 0 25px rgba(244, 114, 182, 0.18);
           cursor: pointer;
           font-size: 13px;
           letter-spacing: 0.03em;
           font-weight: 500;
+          transition: all 0.2s ease;
+        }
+
+        .celebrate-button:hover {
+          background: rgba(255, 255, 255, 0.12);
+          border-color: rgba(244, 114, 182, 0.4);
         }
 
         @media (prefers-reduced-motion: reduce) {

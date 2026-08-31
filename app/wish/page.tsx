@@ -186,7 +186,7 @@ export default function WishPage() {
     return () => clearTimeout(timer);
   }, [extinguishedCount, stopMicrophone]);
 
-  // Warm, conversational sister-to-brother subtexts
+  // Conversational sister-to-brother subtexts
   useEffect(() => {
     if (extinguishedCount === 0) {
       setStatusMessage("");
@@ -206,32 +206,46 @@ export default function WishPage() {
   }, [stopMicrophone]);
 
   return (
-    <main className="relative min-h-[100svh] w-full overflow-hidden bg-[#060309] text-stone-100 flex flex-col items-center justify-between p-6 select-none font-sans">
+    <main className="relative min-h-[100dvh] w-full overflow-hidden bg-black text-stone-100 flex flex-col items-center justify-between p-6 select-none font-sans">
       
-      {/* 1. Ambient Warm Lighting */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[360px] bg-amber-500/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-[-40px] left-1/2 -translate-x-1/2 w-[420px] h-[300px] bg-rose-950/25 rounded-full blur-[130px]" />
+      {/* =====================================================
+          BACKGROUND: PURE BLACK NIGHT SKY & TWINKLING STARS
+      ====================================================== */}
+      <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-black">
+        {/* Soft Ambient Glows */}
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.12, 0.25, 0.12],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-[38%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(450px,85vw)] h-[min(450px,85vw)] bg-amber-500/[0.08] rounded-full blur-[120px]"
+        />
+        <div className="absolute bottom-[-60px] left-1/2 -translate-x-1/2 w-[min(420px,80vw)] h-[280px] bg-rose-950/20 rounded-full blur-[120px]" />
 
-        {/* Floating golden motes */}
-        {Array.from({ length: 16 }).map((_, index) => (
+        {/* Twinkling Stars */}
+        {Array.from({ length: 45 }).map((_, index) => (
           <motion.span
             key={index}
-            className="absolute rounded-full bg-amber-200/40"
+            className="absolute rounded-full bg-white"
             style={{
-              width: index % 3 === 0 ? "3px" : "2px",
-              height: index % 3 === 0 ? "3px" : "2px",
-              left: `${10 + ((index * 23) % 80)}%`,
-              top: `${30 + ((index * 19) % 50)}%`,
+              width: index % 5 === 0 ? 2 : 1,
+              height: index % 5 === 0 ? 2 : 1,
+              left: `${(index * 37.7) % 96}%`,
+              top: `${(index * 61.3) % 92}%`,
             }}
             animate={{
-              opacity: [0.1, 0.7, 0.1],
-              y: [0, -40, 0],
+              opacity: [0.08, 0.75, 0.08],
+              scale: [0.8, 1.25, 0.8],
             }}
             transition={{
-              duration: 4 + (index % 3),
+              duration: 3 + (index % 4),
               repeat: Infinity,
-              delay: index * 0.4,
+              delay: (index % 8) * 0.45,
               ease: "easeInOut",
             }}
           />
@@ -281,7 +295,7 @@ export default function WishPage() {
         </AnimatePresence>
       </div>
 
-      {/* 2. Handcrafted Illustrated Birthday Cake */}
+      {/* 2. Birthday Cake */}
       <section className="relative z-10 flex flex-col items-center justify-center my-auto">
         <motion.div
           className="relative w-[280px] sm:w-[320px] flex flex-col items-center justify-end pt-12 pb-4"
@@ -303,7 +317,7 @@ export default function WishPage() {
                 whileHover={candle.extinguished ? {} : { scale: 1.08, y: -2 }}
                 whileTap={candle.extinguished ? {} : { scale: 0.95 }}
               >
-                {/* Organic Flame Animation */}
+                {/* Flame Animation */}
                 <AnimatePresence>
                   {!candle.extinguished && (
                     <motion.div
@@ -324,7 +338,7 @@ export default function WishPage() {
                   )}
                 </AnimatePresence>
 
-                {/* Soft Smoke Trail */}
+                {/* Smoke Trail */}
                 <AnimatePresence>
                   {candle.extinguished && (
                     <motion.span
@@ -343,7 +357,7 @@ export default function WishPage() {
                   )}
                 </AnimatePresence>
 
-                {/* Spiral Pastel Candle */}
+                {/* Candle Body */}
                 <div className="relative w-3 h-14 rounded-t-sm rounded-b-[2px] bg-[repeating-linear-gradient(-45deg,#fff1f2_0px,#fff1f2_4px,#f43f5e_4px,#f43f5e_8px)] shadow-md border-t border-amber-100/40">
                   <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-[1.5px] h-2 bg-stone-900" />
                 </div>
@@ -351,10 +365,9 @@ export default function WishPage() {
             ))}
           </div>
 
-          {/* Handcrafted Layered Cake Body */}
+          {/* Layered Cake */}
           <div className="relative z-20 flex flex-col items-center">
-            
-            {/* Strawberries / Cake Toppings */}
+            {/* Strawberries Topping */}
             <div className="relative z-30 flex items-center justify-center gap-3 -mb-2.5">
               {[...Array(5)].map((_, i) => (
                 <div
@@ -364,9 +377,8 @@ export default function WishPage() {
               ))}
             </div>
 
-            {/* Top Tier (Vanilla Velvet with Cream Drips) */}
+            {/* Top Tier */}
             <div className="relative w-48 h-12 rounded-t-2xl bg-gradient-to-b from-[#fff5ea] via-[#fce7db] to-[#f7d6c8] shadow-inner flex flex-col justify-between overflow-hidden border-t border-white/60">
-              {/* Organic Cream Drops */}
               <div className="flex justify-around items-start w-full px-2">
                 <div className="w-3 h-3 bg-[#fffaf5] rounded-b-full shadow-sm" />
                 <div className="w-2.5 h-4.5 bg-[#fffaf5] rounded-b-full shadow-sm" />
@@ -375,36 +387,37 @@ export default function WishPage() {
               </div>
             </div>
 
-            {/* Middle Strawberry Cream Filling */}
+            {/* Middle Layer */}
             <div className="relative z-20 w-52 h-3.5 bg-[#f43f5e]/85 rounded-full -mt-1 shadow-sm flex items-center justify-around px-3 border-y border-rose-300/30">
               {[...Array(7)].map((_, i) => (
                 <span key={i} className="w-1 h-1 rounded-full bg-white/70" />
               ))}
             </div>
 
-            {/* Bottom Tier (Warm Cocoa Sponge) */}
+            {/* Bottom Tier */}
             <div className="relative w-56 h-14 rounded-b-2xl bg-gradient-to-b from-[#844c45] to-[#5a2e2a] -mt-1 shadow-md flex items-center justify-center border-b border-stone-800/40">
-              {/* Fine gold pearl garnish */}
               <div className="flex justify-around w-full px-4 pt-4">
                 {[...Array(9)].map((_, i) => (
-                  <span key={i} className="w-1.5 h-1.5 rounded-full bg-amber-200/60 shadow-[0_0_4px_rgba(253,230,138,0.4)]" />
+                  <span
+                    key={i}
+                    className="w-1.5 h-1.5 rounded-full bg-amber-200/60 shadow-[0_0_4px_rgba(253,230,138,0.4)]"
+                  />
                 ))}
               </div>
             </div>
 
-            {/* Elegant Vintage Cake Stand */}
+            {/* Cake Stand */}
             <div className="relative z-10 flex flex-col items-center -mt-1">
               <div className="w-64 h-3.5 bg-gradient-to-r from-[#d4af37] via-[#fef08a] to-[#b48c26] rounded-full shadow-lg border-t border-white/50" />
               <div className="w-14 h-4 bg-gradient-to-b from-[#b48c26] to-[#856417] rounded-b-sm shadow-inner" />
               <div className="w-28 h-2 bg-gradient-to-r from-[#856417] via-[#d4af37] to-[#856417] rounded-full shadow-md" />
             </div>
 
-            {/* Soft Shadow on Table */}
-            <div className="w-64 h-4 bg-black/50 blur-md rounded-full -mt-1" />
+            <div className="w-64 h-4 bg-black/60 blur-md rounded-full -mt-1" />
           </div>
         </motion.div>
 
-        {/* Live Candle Whisper Status */}
+        {/* Live Candle Status */}
         <div className="h-8 flex items-center justify-center mt-2">
           <AnimatePresence mode="wait">
             {statusMessage && !celebrating && (
@@ -422,7 +435,7 @@ export default function WishPage() {
           </AnimatePresence>
         </div>
 
-        {/* Gentle Listening Indicator or Tap Hint */}
+        {/* Mic / Tap Hint */}
         <div className="h-6 flex items-center justify-center">
           {introStep === 2 && !celebrating && extinguishedCount < 3 && (
             <motion.div
@@ -451,15 +464,12 @@ export default function WishPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-[#060309]/90 backdrop-blur-md p-6 text-center"
+            className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-black/90 backdrop-blur-md p-6 text-center"
           >
             <div className="text-3xl mb-3 animate-bounce">✨</div>
             <h1 className="font-serif text-3xl md:text-4xl text-rose-100 font-normal tracking-tight">
               Wishes Sent to the Stars ❤️
             </h1>
-            <p className="text-stone-300/80 text-sm mt-3 tracking-wide max-w-xs leading-relaxed font-light">
-              I wrote something special just for you on the next page.
-            </p>
 
             {/* Read Card Button */}
             <div className="mt-8">
@@ -473,7 +483,7 @@ export default function WishPage() {
                     whileTap={{ scale: 0.97 }}
                     className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white/[0.08] hover:bg-white/[0.14] border border-white/20 text-stone-100 text-xs uppercase tracking-[0.2em] font-medium transition backdrop-blur-md shadow-[0_0_20px_rgba(255,255,255,0.08)]"
                   >
-                    <span>Read Your Card</span>
+                    <span>Continue</span>
                     <span>→</span>
                   </motion.button>
                 )}
@@ -483,13 +493,12 @@ export default function WishPage() {
         )}
       </AnimatePresence>
 
-      {/* Bottom Subtle Branding / Space */}
-      <div className="relative z-10 pb-4">
+      {/* Bottom Footer Note */}
+      <div className="relative z-10 pb-2">
         <p className="text-[10px] tracking-[0.25em] text-stone-400/30 uppercase">
           Happy Birthday Sis
         </p>
       </div>
-
     </main>
   );
 }

@@ -13,7 +13,7 @@ import { ArrowRight, Music2, Sparkles } from "lucide-react";
 const singingVerses = [
   "Haaapppy birthdaaaay to youuu 🎵",
   "Haaapppy birthdaaaay to youuu ❤️",
-  "Happy birthdaaaay, dear Sister ✨",
+  "Happy birthdaaaay, Dada Sophia ✨",
   "Happy birthday to youuu! 🎂🎉",
 ];
 
@@ -31,19 +31,19 @@ export default function Home() {
 
   /*
     --------------------------------------------------------
-    INTIMATE SURPRISE ENTRANCE TIMELINE
+    INTIMATE SURPRISE ENTRANCE TIMELINE (Paced & Relaxed)
     --------------------------------------------------------
   */
   useEffect(() => {
     const timers = [
-      // 1. "Wait... quiet everyone 🤫"
-      setTimeout(() => setStage(1), 1800),
+      // 1. Stage 0 -> 1: "Wait... quiet everyone 🤫" stays for ~3.5s
+      setTimeout(() => setStage(1), 3500),
 
-      // 2. "Close your eyes... Ready?"
-      setTimeout(() => setStage(2), 4300),
+      // 2. Stage 1 -> 2: "I have a little surprise just for you... ❤️" stays for ~4.5s
+      setTimeout(() => setStage(2), 8000),
 
-      // 3. SURPRISE! Song starts & flowers fall
-      setTimeout(() => setStage(3), 6600),
+      // 3. Stage 2 -> 3: "Close your eyes... Ready? ✨" stays for ~4.5s before singing starts
+      setTimeout(() => setStage(3), 12500),
     ];
 
     return () => timers.forEach(clearTimeout);
@@ -67,7 +67,7 @@ export default function Home() {
         .catch(() => setMusicPlaying(false));
     }
 
-    // Interval to cycle and repeat the verses indefinitely
+    // Cycles lyrics every 4.8s so each sung line can be comfortably read
     const lyricInterval = setInterval(() => {
       setCurrentVerseIndex((prev) => {
         const nextIndex = (prev + 1) % singingVerses.length;
@@ -76,7 +76,7 @@ export default function Home() {
         }
         return nextIndex;
       });
-    }, 3300);
+    }, 4800);
 
     return () => clearInterval(lyricInterval);
   }, [stage]);
@@ -154,7 +154,7 @@ export default function Home() {
       </div>
 
       {/* =====================================================
-          1. SUSPENSE INTRO (Sneaking in quietly)
+          1. SUSPENSE INTRO (Paced Smooth Entrances & Exits)
       ====================================================== */}
       <AnimatePresence mode="wait">
         {stage === 0 && (
@@ -163,7 +163,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black p-6"
           >
             <div className="text-center max-w-xs">
@@ -173,7 +173,7 @@ export default function Home() {
                   scale: [0.9, 1.1, 0.9],
                 }}
                 transition={{
-                  duration: 2.2,
+                  duration: 3,
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
@@ -185,7 +185,7 @@ export default function Home() {
               <motion.p
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.35, duration: 0.8 }}
+                transition={{ delay: 0.5, duration: 1.2 }}
                 className="text-xs font-light tracking-[0.32em] text-white/40 uppercase"
               >
                 Wait... quiet everyone 🤫
@@ -200,22 +200,22 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 1.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black p-6"
           >
             <div className="text-center max-w-sm">
               <motion.p
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9 }}
+                transition={{ duration: 1.3 }}
                 className="font-serif text-2xl italic text-white/80 sm:text-3xl leading-snug"
               >
-                We have a little surprise
+                I have a little surprise
               </motion.p>
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 0.7, duration: 0.9 }}
+                transition={{ delay: 1.0, duration: 1.4 }}
                 className="mt-2 font-serif text-2xl italic text-pink-200 sm:text-3xl leading-snug"
               >
                 just for you... ❤️
@@ -230,14 +230,14 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.7 }}
+            transition={{ duration: 1.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center bg-black p-6"
           >
             <div className="text-center max-w-sm">
               <motion.p
                 initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
+                transition={{ duration: 1.2, ease: "easeOut" }}
                 className="font-serif text-3xl italic text-white/90 sm:text-4xl leading-tight"
               >
                 Close your eyes...
@@ -245,7 +245,7 @@ export default function Home() {
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
+                transition={{ delay: 1.0, duration: 1.3 }}
                 className="mt-3 font-serif text-4xl italic text-pink-200 sm:text-5xl leading-tight"
               >
                 Ready? ✨
@@ -297,14 +297,14 @@ export default function Home() {
       </AnimatePresence>
 
       {/* =====================================================
-          3. MAIN CELEBRATION SCENE (Full Pure-Black Responsive)
+          3. MAIN CELEBRATION SCENE (Pure-Black Responsive)
       ====================================================== */}
       <AnimatePresence>
         {stage >= 3 && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 1.2 }}
+            transition={{ duration: 1.4 }}
             className="relative z-20 flex min-h-[100dvh] w-full flex-col justify-between px-4 sm:px-6 pb-[max(20px,env(safe-area-inset-bottom))] pt-[max(16px,env(safe-area-inset-top))]"
           >
             {/* Top Bar: Music Toggle */}
@@ -334,7 +334,7 @@ export default function Home() {
               <motion.div
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
+                transition={{ delay: 0.3, type: "spring", stiffness: 180 }}
                 className="mb-4 sm:mb-6"
               >
                 <span className="text-xl sm:text-2xl">✨</span>
@@ -348,7 +348,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 18, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -18, scale: 0.95 }}
-                    transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
                     className="flex flex-col items-center text-center"
                   >
                     <p
@@ -371,7 +371,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
+              transition={{ delay: 0.8, duration: 1 }}
               className="flex w-full flex-col items-center pb-2 max-w-xs mx-auto"
             >
               <motion.button
@@ -388,25 +388,18 @@ export default function Home() {
                 }}
                 transition={{
                   boxShadow: {
-                    duration: 3,
+                    duration: 3.5,
                     repeat: Infinity,
                     ease: "easeInOut",
                   },
                 }}
                 className="w-full group flex items-center justify-center gap-3 rounded-full border border-pink-300/20 bg-white/[0.07] px-6 py-3.5 text-xs sm:text-sm font-medium text-white/90 backdrop-blur-xl transition hover:border-pink-200/40 hover:bg-white/[0.1] disabled:opacity-0"
               >
-                <span>Blow out your candles</span>
+                <span>There's more</span>
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1 text-pink-300 flex-shrink-0" />
               </motion.button>
 
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1, duration: 1 }}
-                className="mt-3.5 text-[9px] font-light tracking-[0.3em] text-white/20 uppercase text-center"
-              >
-                MADE WITH LOVE ❤️
-              </motion.p>
+             
             </motion.div>
           </motion.div>
         )}

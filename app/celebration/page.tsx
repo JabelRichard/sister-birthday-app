@@ -1,3 +1,4 @@
+// app/celebration/page.tsx
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -26,7 +27,9 @@ type Particle = {
   rotationSpeed: number;
 };
 
-const FINAL_MESSAGE = "Happy Birthday, Sis! 🎂❤️";
+const FINAL_MESSAGE = "Happy Birthday, Dada Sophia! 🎂❤️";
+// Array.from preserves full multi-byte emojis properly
+const FINAL_CHARS = Array.from(FINAL_MESSAGE);
 
 function random(min: number, max: number) {
   return Math.random() * (max - min) + min;
@@ -131,7 +134,6 @@ export default function CelebrationPage() {
         });
       }
 
-      /* Core glow sparks */
       for (let i = 0; i < 6; i++) {
         particlesRef.current.push({
           x: x + random(-3, 3),
@@ -148,7 +150,6 @@ export default function CelebrationPage() {
         });
       }
 
-      /* Subtle floating hearts */
       if (Math.random() > 0.4) {
         for (let i = 0; i < 2; i++) {
           particlesRef.current.push({
@@ -167,7 +168,6 @@ export default function CelebrationPage() {
         }
       }
 
-      /* Confetti flakes */
       if (size === "large") {
         for (let i = 0; i < 10; i++) {
           particlesRef.current.push({
@@ -231,7 +231,7 @@ export default function CelebrationPage() {
     []
   );
 
-  /* Animation Engine */
+  /* Animation Loop */
   const startAnimation = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -246,7 +246,7 @@ export default function CelebrationPage() {
       const width = window.innerWidth;
       const height = window.innerHeight;
 
-      context.fillStyle = "rgba(6, 6, 15, 0.22)";
+      context.fillStyle = "rgba(0, 0, 0, 0.22)";
       context.fillRect(0, 0, width, height);
 
       /* Rocket trails */
@@ -410,12 +410,12 @@ export default function CelebrationPage() {
     };
   }, [showBirthday, reducedMotion, launchFirework]);
 
-  /* Typewriter Sequence */
+  /* Accurate Typewriter Sequence */
   useEffect(() => {
     if (!showBirthday) return;
 
     if (reducedMotion) {
-      setTypedLetters(FINAL_MESSAGE.length);
+      setTypedLetters(FINAL_CHARS.length);
       return;
     }
 
@@ -426,10 +426,10 @@ export default function CelebrationPage() {
       current += 1;
       setTypedLetters(current);
 
-      if (current >= FINAL_MESSAGE.length) {
+      if (current >= FINAL_CHARS.length) {
         clearInterval(interval);
       }
-    }, 70);
+    }, 65);
 
     return () => {
       clearInterval(interval);
@@ -545,9 +545,9 @@ export default function CelebrationPage() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
             >
-              {/* Main Headline */}
+              {/* Full Title using character mapping without breaking emojis */}
               <div className="birthday-title">
-                {FINAL_MESSAGE.split("").map((character, index) => (
+                {FINAL_CHARS.map((character, index) => (
                   <motion.span
                     key={`${character}-${index}`}
                     initial={{ opacity: 0, y: 10 }}
@@ -561,22 +561,6 @@ export default function CelebrationPage() {
                   </motion.span>
                 ))}
               </div>
-
-              {/* Signature Block */}
-              <AnimatePresence>
-                {showFinalMessage && (
-                  <motion.div
-                    className="signature"
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                  >
-                    <div className="signature-line" />
-                    <p>Made with love ❤️</p>
-                    <span>From your brother.</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
 
               {/* Celebrate Again CTA */}
               <AnimatePresence>
@@ -614,7 +598,7 @@ export default function CelebrationPage() {
           padding: 0;
           width: 100%;
           min-height: 100%;
-          background: #04040c;
+          background: #000000;
         }
 
         .celebration-page {
@@ -622,18 +606,7 @@ export default function CelebrationPage() {
           width: 100%;
           min-height: 100dvh;
           overflow: hidden;
-          background:
-            radial-gradient(
-              ellipse at 50% 70%,
-              rgba(56, 42, 86, 0.32),
-              transparent 50%
-            ),
-            linear-gradient(
-              180deg,
-              #03040c 0%,
-              #070817 50%,
-              #0a0818 100%
-            );
+          background: #000000;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -681,7 +654,7 @@ export default function CelebrationPage() {
           border-radius: 50%;
           background: radial-gradient(
             ellipse,
-            rgba(108, 72, 125, 0.18),
+            rgba(244, 114, 182, 0.12),
             transparent 65%
           );
           filter: blur(35px);
@@ -692,7 +665,7 @@ export default function CelebrationPage() {
           position: relative;
           z-index: 20;
           width: 100%;
-          max-width: 480px;
+          max-width: 600px;
           min-height: 100dvh;
           display: flex;
           flex-direction: column;
@@ -715,8 +688,8 @@ export default function CelebrationPage() {
 
         .opening p {
           margin: 0;
-          max-width: 320px;
-          color: rgba(255, 246, 239, 0.95);
+          max-width: 380px;
+          color: rgba(255, 255, 255, 0.95);
           font-family:
             Georgia,
             "Times New Roman",
@@ -725,14 +698,14 @@ export default function CelebrationPage() {
           font-weight: 400;
           line-height: 1.3;
           letter-spacing: -0.5px;
-          text-shadow: 0 4px 25px rgba(255, 210, 180, 0.16);
+          text-shadow: 0 4px 25px rgba(244, 114, 182, 0.2);
         }
 
         .opening-star {
           margin-top: 20px;
-          color: rgba(255, 211, 159, 0.75);
+          color: #f472b6;
           font-size: 14px;
-          text-shadow: 0 0 16px rgba(255, 188, 115, 0.7);
+          text-shadow: 0 0 16px rgba(244, 114, 182, 0.7);
         }
 
         /* Birthday Headline */
@@ -740,73 +713,38 @@ export default function CelebrationPage() {
           display: flex;
           justify-content: center;
           flex-wrap: wrap;
-          max-width: 340px;
-          color: rgba(255, 248, 241, 0.98);
+          width: 100%;
+          max-width: min(520px, 94vw);
+          color: rgba(255, 255, 255, 0.98);
           font-family:
             Georgia,
             "Times New Roman",
             serif;
-          font-size: clamp(32px, 8.5vw, 48px);
+          font-size: clamp(28px, 7.5vw, 46px);
           font-weight: 500;
-          line-height: 1.2;
-          letter-spacing: -0.6px;
+          line-height: 1.25;
+          letter-spacing: -0.5px;
           text-shadow:
-            0 0 20px rgba(255, 207, 167, 0.2),
-            0 8px 30px rgba(0, 0, 0, 0.4);
+            0 0 25px rgba(244, 114, 182, 0.3),
+            0 8px 30px rgba(0, 0, 0, 0.6);
         }
 
         .birthday-title span {
           display: inline-block;
         }
 
-        /* Signature */
-        .signature {
-          margin-top: clamp(28px, 6vh, 44px);
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .signature-line {
-          width: 45px;
-          height: 1px;
-          margin-bottom: 12px;
-          background: rgba(255, 220, 190, 0.35);
-        }
-
-        .signature p {
-          margin: 0;
-          color: rgba(255, 240, 230, 0.8);
-          font-family:
-            Georgia,
-            "Times New Roman",
-            serif;
-          font-size: clamp(15px, 4vw, 18px);
-        }
-
-        .signature span {
-          margin-top: 5px;
-          color: rgba(255, 255, 255, 0.45);
-          font-family:
-            "Segoe Print",
-            "Caveat",
-            "Bradley Hand",
-            cursive;
-          font-size: 13px;
-        }
-
         /* CTA */
         .button-wrapper {
-          margin-top: clamp(20px, 4vh, 32px);
+          margin-top: clamp(28px, 6vh, 44px);
           pointer-events: auto;
         }
 
         .again-button {
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          border: 1px solid rgba(244, 114, 182, 0.25);
           border-radius: 999px;
-          padding: 12px 24px;
+          padding: 12px 26px;
           background: rgba(255, 255, 255, 0.08);
-          color: rgba(255, 249, 242, 0.9);
+          color: #ffffff;
           font-family:
             Inter,
             system-ui,
@@ -816,8 +754,13 @@ export default function CelebrationPage() {
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           cursor: pointer;
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-          transition: background 0.2s ease, border-color 0.2s ease;
+          box-shadow: 0 0 25px rgba(244, 114, 182, 0.18);
+          transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+        }
+
+        .again-button:hover {
+          background: rgba(255, 255, 255, 0.14);
+          border-color: rgba(244, 114, 182, 0.45);
         }
 
         .again-button:active {
