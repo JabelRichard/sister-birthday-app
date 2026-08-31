@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Happy Birthday, Sis! ❤️",
+  title: "Happy Birthday, Dada Sophia ❤️",
   description: "A special birthday experience just for you.",
 };
 
