@@ -468,7 +468,7 @@ export default function WishPage() {
           >
             <div className="text-3xl mb-3 animate-bounce">✨</div>
             <h1 className="font-serif text-3xl md:text-4xl text-rose-100 font-normal tracking-tight">
-              Wishes Sent to the Stars ❤️
+              Wish made!😄😄❤️
             </h1>
 
             {/* Read Card Button */}
@@ -496,7 +496,7 @@ export default function WishPage() {
       {/* Bottom Footer Note */}
       <div className="relative z-10 pb-2">
         <p className="text-[10px] tracking-[0.25em] text-stone-400/30 uppercase">
-          Happy Birthday Sis
+          Happy Birthday Dada Sophia
         </p>
       </div>
     </main>

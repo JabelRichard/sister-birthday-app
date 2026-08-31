@@ -188,7 +188,7 @@ export default function Home() {
                 transition={{ delay: 0.5, duration: 1.2 }}
                 className="text-xs font-light tracking-[0.32em] text-white/40 uppercase"
               >
-                Wait... quiet everyone 🤫
+               Today is all about you
               </motion.p>
             </div>
           </motion.div>

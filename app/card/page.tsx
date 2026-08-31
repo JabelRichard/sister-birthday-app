@@ -7,7 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const birthdayMessage = `Dear Dada Sophia ❤️
 
-It’s your special day, sis, and honestly, I don’t even know where to begin because there is so much, I want to say to you. ❤️
+It’s your special day and honestly, I don’t even know where to begin because there is so much, I want to say to you. ❤️
 
 I could sit here and write so many things about you, and I still don’t think I would be able to fully explain how much you mean to me
 You are not just my sister. You have been a guide, someone I can look up to, someone who has helped me through different moments in my life, and someone who has always given me reasons to keep going and become a better version of myself.
@@ -17,8 +17,7 @@ I may not always say it, I may not always know how to express it, But I notice i
 I’m honestly so lucky to have you as my sister. ❤️
 
 So today, I don’t just wish you a happy birthday.
-I pray that God gives you a long, beautiful, and blessed life, May He protect you, guide you, give you peace, and bless you with the things you have been praying for quietly in your heart.
-May this new year bring you more happiness than sadness, more reasons to smile than to worry, and more beautiful moments
+I pray that God gives you a long, beautiful, and blessed life
 And I hope that years from now, we will still be here celebrating your birthday together ❤️
 
 I know I could keep going forever, because I have so much more I want to say. But maybe some things don’t need to be said perfectly.
@@ -29,9 +28,8 @@ I appreciate you.
 
 I’m proud to call you, my sister.
 
-And I’m truly grateful that life gave me you❤️
 
-Happy Birthday, Sis. 🎂❤️
+Happy Birthday, Dada Sophia. 🎂❤️
 
 I love you so, so much. ❤️`;
 
