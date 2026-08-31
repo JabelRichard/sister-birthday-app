@@ -519,13 +519,6 @@ export default function CelebrationPage() {
             >
               {showFirstMessage && (
                 <>
-                  <motion.p
-                    initial={{ opacity: 0, y: 16 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.9 }}
-                  >
-                    Here's to many more memories together. ❤️
-                  </motion.p>
                   <motion.div
                     className="opening-star"
                     initial={{ opacity: 0, scale: 0 }}
